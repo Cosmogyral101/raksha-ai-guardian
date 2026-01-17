@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-/* Raksha - Senior-Friendly Design System */
-/* All colors in HSL for consistency */
+/* Raksha - Elder-UI Design System */
 
 @layer base {
   :root {
-    /* Core Background & Text - High Contrast for Seniors */
+    /* Root font size: 20px for seniors */
+    font-size: 20px;
+
+    /* Core Background & Text - High Contrast (>7:1 ratio) */
     --background: 0 0% 98%;
     --foreground: 0 0% 10%;
 
@@ -20,7 +22,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
 
-    /* Primary Action - Royal Blue */
+    /* Primary Action - Royal Blue #2563EB */
     --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
 
@@ -36,11 +38,11 @@
     --accent: 221 83% 96%;
     --accent-foreground: 221 83% 40%;
 
-    /* Danger/Scam Alert - Vivid Red */
+    /* Danger/Scam Alert - Vivid Red #DC2626 */
     --destructive: 0 84% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Safe/Success - Deep Emerald */
+    /* Safe/Success - Deep Emerald #059669 */
     --safe: 161 94% 30%;
     --safe-foreground: 0 0% 100%;
 
@@ -51,23 +53,24 @@
     /* Borders & Inputs */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 221 83% 53%;
+    --ring: 45 100% 51%;
 
     --radius: 1rem;
 
-    /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(221 83% 53% / 0.05), hsl(161 94% 30% / 0.05));
-    --gradient-safe: linear-gradient(135deg, hsl(161 94% 30% / 0.1), hsl(161 94% 40% / 0.05));
-    --gradient-danger: linear-gradient(135deg, hsl(0 84% 50% / 0.1), hsl(0 84% 60% / 0.05));
-
-    /* Shadows */
+    /* Neumorphic shadows */
+    --shadow-neumorphic: 6px 6px 12px hsl(0 0% 85%), -6px -6px 12px hsl(0 0% 100%);
+    --shadow-neumorphic-inset: inset 4px 4px 8px hsl(0 0% 85%), inset -4px -4px 8px hsl(0 0% 100%);
     --shadow-soft: 0 4px 20px -2px hsl(0 0% 0% / 0.08);
     --shadow-medium: 0 8px 30px -4px hsl(0 0% 0% / 0.12);
     --shadow-safe: 0 8px 30px -4px hsl(161 94% 30% / 0.2);
     --shadow-danger: 0 8px 30px -4px hsl(0 84% 50% / 0.2);
     --shadow-primary: 0 8px 30px -4px hsl(221 83% 53% / 0.3);
 
-    /* Sidebar (keeping defaults) */
+    /* Gradients */
+    --gradient-safe: linear-gradient(135deg, hsl(161 94% 30% / 0.1), hsl(161 94% 40% / 0.05));
+    --gradient-danger: linear-gradient(135deg, hsl(0 84% 50% / 0.1), hsl(0 84% 60% / 0.05));
+
+    /* Sidebar */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -99,7 +102,8 @@
     --safe-foreground: 0 0% 100%;
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 221 83% 60%;
+    --ring: 45 100% 51%;
+    --shadow-neumorphic: 6px 6px 12px hsl(0 0% 5%), -6px -6px 12px hsl(0 0% 15%);
   }
 }
 
@@ -115,30 +119,30 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 18px;
     line-height: 1.6;
   }
 
-  /* Senior-friendly focus states */
+  /* Senior-friendly focus states - 5px gold ring */
   *:focus-visible {
-    @apply outline-none ring-4 ring-primary ring-offset-2 ring-offset-background;
+    @apply outline-none ring-offset-2 ring-offset-background;
+    box-shadow: 0 0 0 5px hsl(45 100% 51%);
   }
 
-  /* Large, readable headings */
+  /* Large, readable headings - minimum 3rem */
+  h1, h2, h3 {
+    @apply font-black tracking-tight;
+  }
+
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+    @apply text-4xl md:text-5xl lg:text-6xl;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl font-bold tracking-tight;
+    @apply text-3xl md:text-4xl;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl font-semibold;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl font-semibold;
+    @apply text-2xl md:text-3xl;
   }
 
   p {
@@ -146,22 +150,31 @@
   }
 }
 
+@layer components {
+  /* Neumorphic-Lite Buttons */
+  .neumorphic-btn {
+    box-shadow: var(--shadow-neumorphic);
+    transition: all 0.15s ease;
+  }
+
+  .neumorphic-btn:active {
+    box-shadow: var(--shadow-neumorphic-inset);
+    transform: translateY(2px);
+  }
+
+  .neumorphic-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 8px 8px 16px hsl(0 0% 82%), -8px -8px 16px hsl(0 0% 100%);
+  }
+}
+
 @layer utilities {
-  /* Animation utilities */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
   }
 
   .animate-slide-up {
     animation: slideUp 0.5s ease-out forwards;
-  }
-
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-scan {
-    animation: scan 2s ease-in-out;
   }
 
   @keyframes fadeIn {
@@ -180,16 +193,6 @@
     }
   }
 
-  @keyframes scan {
-    0%, 100% { 
-      background-position: 0% 50%;
-    }
-    50% { 
-      background-position: 100% 50%;
-    }
-  }
-
-  /* Result card states */
   .result-safe {
     background: var(--gradient-safe);
     box-shadow: var(--shadow-safe);
