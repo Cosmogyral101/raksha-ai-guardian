@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { Content, Language, ContentType } from "@/lib/localization";
 
 interface LanguageContextType {
@@ -17,7 +17,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLanguage((prev) => (prev === "en" ? "hi" : "en"));
   };
 
-  const t = Content[language];
+  const t = useMemo((): ContentType => Content[language], [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
