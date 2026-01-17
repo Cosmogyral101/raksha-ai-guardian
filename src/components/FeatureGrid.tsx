@@ -7,7 +7,7 @@ import FamilyAlert from "./FamilyAlert";
 import VideoTutorials from "./VideoTutorials";
 
 const FeatureGrid = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [showAudioScanner, setShowAudioScanner] = useState(false);
   const [showFamilyAlert, setShowFamilyAlert] = useState(false);
   const [showVideoTutorials, setShowVideoTutorials] = useState(false);
