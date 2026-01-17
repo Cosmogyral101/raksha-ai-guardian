@@ -81,6 +81,13 @@ const FeatureGrid = () => {
                   ? "hover:border-safe/30"
                   : "hover:border-destructive/30";
 
+              const buttonStyles =
+                feature.color === "primary"
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25"
+                  : feature.color === "safe"
+                  ? "bg-safe text-white hover:bg-safe/90 shadow-lg shadow-safe/25"
+                  : "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-lg shadow-destructive/25";
+
               return (
                 <div
                   key={feature.title}
@@ -102,13 +109,12 @@ const FeatureGrid = () => {
                   </p>
 
                   <Button
-                    variant="outline"
                     size="default"
                     onClick={feature.onClick}
-                    className="w-full group-hover:bg-accent transition-colors min-h-[56px] neumorphic-btn"
+                    className={`w-full min-h-[56px] font-semibold text-lg transition-all duration-200 active:translate-y-0.5 active:shadow-none ${buttonStyles}`}
                   >
                     {feature.action}
-                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
               );
